@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './signup.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -11,19 +11,28 @@ const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
-  
+
+  // Set the tab name (title) for this page
+  useEffect(() => {
+    
+    document.title = "Sign Up | My Website"; // Set custom tab name here
+    return () => {
+      document.title = "My Website"; // Reset to default when leaving this page
+    };
+  }, []);
+
   const handleSignup = async (e) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-    
+
     try {
       const response = await axios.post(`${backendUrl}/api/auth/signup`, {
         username,
         email,
         password,
       });
-    
+
       if (response.data.success) {
         localStorage.setItem('token', response.data.token);
         alert('Account created successfully!');
@@ -36,7 +45,6 @@ const Signup = () => {
     } finally {
       setIsLoading(false);
     }
-    
   };
 
   return (

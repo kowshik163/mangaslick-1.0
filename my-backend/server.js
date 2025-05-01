@@ -12,7 +12,7 @@ const app = express();
 const port = process.env.PORT || 5001;
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://b909-14-139-244-108.ngrok-free.app'],
+  origin: ['http://localhost:3000', 'https://764e-14-139-244-108.ngrok-free.app'],
   methods: 'GET,POST,PUT,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,

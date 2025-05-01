@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './reset.css';
 
@@ -26,7 +26,12 @@ import Profile from './components/Profile'; // Import the Profile component
 const AppWrapper = () => {
   const location = useLocation();
   const [currentFilters] = useState({});
-
+  useEffect(() => {
+    if (location.pathname === '/') {
+      document.title = 'Home | Mangaslick'; // Set custom title for homepage
+    }
+  }, [location.pathname]); // Update title whenever location changes
+  
   const FilteredMangaSection = (
     <>
       <GenreList />
