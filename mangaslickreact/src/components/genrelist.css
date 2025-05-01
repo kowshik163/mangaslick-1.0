@@ -1,0 +1,111 @@
+/* Base Styles */
+.genre {
+  margin: 20px;
+  font-size: 24px;
+  background-color: #2d3436;
+  color: #ffeaa7;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.g1 {
+  height: 40px;
+  display: inline-block;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px 10px;
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  line-height: 30px;
+}
+
+.g1:hover {
+  background-color: #00cec9;
+}
+
+/* Responsive Styles */
+@media (max-width: 480px) {
+  .genre {
+    display: none; /* Hidden on mobile */
+  }
+
+  .genre.mobile-version {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .g1 {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+}
+.filter-box {
+  background-color: #2d3436;
+  padding: 20px;
+  border-radius: 16px;
+  color: white;
+  width: 25%;
+  min-width: 250px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  margin-right: 20px;
+  height: fit-content;
+}
+
+.filter-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.filter-type-button {
+  padding: 8px 14px;
+  background-color: #636e72;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filter-type-button.active {
+  background-color: #00cec9;
+}
+
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  justify-content: center;
+}
+
+.filter-tag {
+  background-color: #444;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filter-tag:hover {
+  background-color: #555;
+}
+
+.filter-tag.selected {
+  background-color: #fdcb6e;
+  color: #2d3436;
+}
+

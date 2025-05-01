@@ -1,0 +1,270 @@
+/* Global Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background);
+  color: var(--text-color);
+}
+
+.reader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #11263b73;
+  transition: all 0.3s ease;
+}
+
+.manga-logo {
+  width: 100%;
+  text-align: center;
+  /* margin-bottom: 1rem; */
+  max-height: 150px;
+}
+
+.manga-logo img{
+  width: 50%;
+  max-width: 250px;
+  height: auto;
+  float: left;
+}
+
+.reader-controls {
+  width: 100%;
+  padding: 0px;
+  text-align: left;
+}
+
+.manga-title {
+  margin-bottom: 10px;
+  background-color: #32373e;
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 8px;
+  height: 53px;
+}
+
+.manga-title a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.chapter-nav-container {
+  background-color: #32373e;
+  display: flex;
+  padding: 6px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.chapter-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+}
+
+.chapter-nav button,
+.chapter-nav select {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  height: 40px;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.chapter-nav button:hover,
+.chapter-nav select:hover {
+  background-color: var(--button-hover-bg);
+}
+
+.chapter-nav button:disabled {
+  background-color: #777;
+  cursor: not-allowed;
+}
+
+.reader-settings {
+  position: relative;
+}
+
+.settings-btn {
+  font-size: 1.5rem;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: none;
+  cursor: pointer;
+}
+
+.settings-btn:hover {
+  background-color: var(--button-hover-bg);
+}
+
+.settings-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: var(--dropdown-bg);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 1;
+  width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.settings-dropdown label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.settings-dropdown .setting-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.setting-button {
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.setting-button:hover {
+  background-color: var(--button-hover-bg);
+}
+
+.setting-button.selected {
+  background-color: var(--accent-color);
+}
+
+.manga-pages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  padding: 4px;
+}
+
+.manga-pages img {
+  max-width: 100%;
+  height: auto;
+}
+
+.bottom-controls {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 30px 20px;
+  margin-bottom: 20px;
+}
+
+.bottom-controls button,
+.bottom-controls select {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: none;
+  margin: 0px 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.bottom-controls button:hover,
+.bottom-controls select:hover {
+  background-color: var(--button-hover-bg);
+}
+
+.go-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.go-to-top:hover {
+  background-color: var(--button-hover-bg);
+}
+
+.go-top-icon {
+  font-size: 1.5rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .manga-logo {
+    width: 100%;
+    margin: 0;
+    background-color: #192f4573;
+  }
+
+  .manga-logo img {
+    width: 70%;
+    display: block;
+    height: auto;
+    margin: auto;
+    max-width: 200px;
+    object-fit: cover;
+  }
+  .manga-title {
+ font-size: medium;
+  }
+  .chapter-nav select,
+  .chapter-nav button {
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .go-to-top {
+    bottom: 14px;
+    right: 10px;
+    width: 40px;
+    height: 50px;
+    padding: 10px; 
+  }
+
+  .go-top-icon {
+    font-size: 1.6rem;
+  }
+}
+
+/* Theme Colors */
+:root {
+  --background: #2f3640;
+  --text-color: #e4e4e4;
+  --button-bg: #444;
+  --button-hover-bg: #555;
+  --accent-color: #8d79ff;
+  --highlight-bg: #333;
+  --dropdown-bg: #444;
+}
+
+[data-theme="light"] {
+  --background: #ffffff;
+  --text-color: #222;
+  --button-bg: #ddd;
+  --button-hover-bg: #bbb;
+  --highlight-bg: #f4f4f4;
+  --dropdown-bg: #eee;
+}

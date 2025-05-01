@@ -1,0 +1,148 @@
+.trending-manga-container {
+  background: #1c2a2e;
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 95%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.trending-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.trending-title {
+  font-size: 1.6rem;
+  color: #fdcb6e;
+}
+
+.scroll-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.scroll-buttons button {
+  background-color: #00cec9;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.scroll-buttons button:hover {
+  background-color: #0984e3;
+}
+
+.trending-manga-list {
+  display: flex;
+  gap: 10px;
+  padding-top: 15px;
+  width: 100%;
+  overflow-x: hidden; /* Ensure only horizontal scrolling */
+}
+
+.trending-manga-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #353b48;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #dfe6e9;
+  transition: background-color 0.3s;
+  width: 16%;
+  flex-shrink: 0;
+}
+
+.trending-manga-item:hover {
+  background-color: #636e72;
+}
+
+.trending-manga-item img {
+  object-fit: cover;
+  width: 90%;
+  height: auto;
+  max-height: 200px;
+  border-radius: 8px;
+  border: 2px solid #00cec9;
+  margin-bottom: 6px;
+}
+
+.trending-manga-item-title {
+  font-size: 0.85rem;
+  text-align: center;
+  color: #ffeaa7;
+  width: 100%;
+}
+.trending-manga-list-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+/* .trending-manga-list {
+  display: flex;
+  gap: 10px;
+  transition: transform 0.5s ease;
+}
+
+.shift-left .trending-manga-list {
+  transform: translateX(-100%);
+}
+
+.shift-right .trending-manga-list {
+  transform: translateX(100%);
+} */
+
+
+/* Responsive display */
+@media (max-width: 1024px) {
+  .trending-manga-item {
+    width: 100px;
+  }
+
+  .trending-manga-item img {
+    width: 70px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .trending-manga-item {
+    width: 90px;
+  }
+
+  .trending-manga-item img {
+    width: 60px;
+    height: 90px;
+  }
+
+  .trending-manga-item-title {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .trending-manga-item {
+    width: 48%;
+    height: auto;
+    padding: 2px;
+    overflow: hidden;
+
+  }
+
+  .trending-manga-item img {
+    width: 95%;
+    min-height: 85%;
+    height: 85%;
+  }
+}

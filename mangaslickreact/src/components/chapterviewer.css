@@ -1,0 +1,62 @@
+/* ChapterViewer Component */
+.chapter-viewer {
+    padding: 20px;
+    background-color: #1e1e2f;
+    color: white;
+    min-height: 100vh;
+  }
+  
+  .chapter-viewer h1 {
+    color: #00cec9;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .chapter-viewer iframe {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background-color: #2f3640;
+  }
+  
+  /* Loading State */
+  .chapter-viewer p {
+    text-align: center;
+    color: #ecf0f1;
+    font-size: 18px;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 992px) {
+    .chapter-viewer iframe {
+      height: 500px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .chapter-viewer {
+      padding: 15px;
+    }
+  
+    .chapter-viewer h1 {
+      font-size: 1.5rem;
+    }
+  
+    .chapter-viewer iframe {
+      height: 400px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .chapter-viewer {
+      padding: 10px;
+    }
+  
+    .chapter-viewer h1 {
+      font-size: 1.3rem;
+    }
+  
+    .chapter-viewer iframe {
+      height: 300px;
+    }
+  }

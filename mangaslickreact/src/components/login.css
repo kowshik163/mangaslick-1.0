@@ -1,0 +1,110 @@
+/* Login Component - Reuses auth-container styles */
+.auth-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  
+  .auth-container h2 {
+    margin-bottom: 20px;
+    color: #00cec9;
+  }
+  
+  .auth-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .auth-container input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+  }
+  
+  .auth-container button {
+    padding: 10px;
+    background-color: #00b894;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .auth-container button:hover {
+    background-color: #019875;
+  }
+  
+  .auth-container p {
+    margin-top: 15px;
+  }
+  
+  .auth-container a {
+    color: #74b9ff;
+    text-decoration: none;
+  }
+  
+  .auth-container a:hover {
+    text-decoration: underline;
+  }
+  
+  .social-login {
+    margin-top: 20px;
+  }
+  
+  .social-login button {
+    width: 100%;
+    padding: 10px;
+    background-color: #dd4b39;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .social-login button:hover {
+    background-color: #c23321;
+  }
+  .error-message {
+    color: #ff3333;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .auth-container {
+      margin: 50px auto;
+      padding: 20px;
+      max-width: 350px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .auth-container {
+      margin: 30px 15px;
+      padding: 15px;
+      max-width: 100%;
+    }
+  
+    .auth-container h2 {
+      font-size: 1.5rem;
+    }
+  
+    .auth-container input,
+    .auth-container button,
+    .social-login button {
+      padding: 8px;
+      font-size: 14px;
+    }
+  }

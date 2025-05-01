@@ -1,0 +1,14 @@
+/* reset.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    background-color: #1e1e2fef;
+  }
+  @media (max-width: 480px) {
+    .flexColumn{
+      flex-direction: column;
+    }
+  }
