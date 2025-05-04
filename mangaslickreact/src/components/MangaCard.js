@@ -7,7 +7,7 @@ const MangaCard = ({ image, title, latestChapters = [], description, id }) => {
     <div className="m1">
       <div className="m1img">
         <Link to={`/manga/${id}`}>
-          <img src={image} alt={title} />
+          <img src={image} alt={title} loading='eager' referrerPolicy='no-referrer'/>
         </Link>
       </div>
 

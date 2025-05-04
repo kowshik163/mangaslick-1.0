@@ -78,7 +78,7 @@ const TrendingManga = () => {
         {mangas.map((manga) =>
           manga?.id && manga?.image && manga?.title ? (
             <Link key={manga.id} to={`/manga/${manga.id}`} className="trending-manga-item">
-              <img src={manga.image} alt={manga.title} />
+              <img src={manga.image} alt={manga.title} loading='lazy' referrerPolicy='no-referrer' />
               <p className="trending-manga-item-title">{manga.title}</p>
             </Link>
           ) : null

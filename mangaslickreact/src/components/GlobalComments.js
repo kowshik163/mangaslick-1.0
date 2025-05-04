@@ -34,7 +34,7 @@ const GlobalComments = () => {
         headers['Authorization'] = `Bearer ${token}`;
       }
   
-      const response = await axios.get(`http://localhost:5001/api/comments`, {
+      const response = await axios.get(`https://backend-production-0226e.up.railway.app/api/comments`, {
         headers,
         withCredentials: true
       });
@@ -47,13 +47,10 @@ const GlobalComments = () => {
       }
     } catch (err) {
       console.error('Error fetching comments:', err.message);
-      alert('Failed to load comments.');
+      // alert('Failed to load comments.');
     }
   };
-  
-
-  
-  
+    
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
@@ -130,10 +127,9 @@ const GlobalComments = () => {
     setReplyingTo(null);
     setReplyInput('');
   };
-
-  // Fetch comments when the component mounts
   useEffect(() => {
     fetchComments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

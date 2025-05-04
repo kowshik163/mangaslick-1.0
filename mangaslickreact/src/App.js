@@ -16,6 +16,8 @@ import GlobalComments from './components/GlobalComments';
 import MangaReader from './components/MangaReader';
 import Bookmarks from './components/Bookmarks';
 import CookieConsent from './components/CookieConsent.js'; // added
+import CommunityMangaList from './components/CommunityPicks.js';
+
 
 // New Pages
 import About from './components/About';
@@ -57,6 +59,13 @@ const AppWrapper = () => {
         <Route path="/page/:pageNum" element={FilteredMangaSection} />
         <Route path="/genre/:type" element={FilteredMangaSection} />
         <Route path="/genre/:type/page/:pageNum" element={FilteredMangaSection} />
+        <Route path='Community'   element={<>
+      <GenreList />
+      <TrendingManga />
+      <CommunityMangaList />
+      <GlobalComments /></>
+  }
+/>
         <Route path="/manga/:id" element={<MangaDetails />} />
         <Route path="/bookmarks" element={<Bookmarks />} />
         <Route path="/profile" element={<Profile />} /> {/* Add the profile route here */}

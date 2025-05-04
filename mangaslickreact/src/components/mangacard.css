@@ -7,7 +7,7 @@
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     background-color: #2f3640;
-    height: 25vh;
+    height: 24vh;
   }
   
   .m1:hover {
@@ -71,7 +71,7 @@
     overflow-wrap: break-word;
   }
   
-  /* Responsive Styles */
+
   @media (max-width: 768px) {
     .m1 {
       height: 18vh; /* Shorter cards on tablets */

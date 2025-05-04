@@ -5,6 +5,8 @@ import mongoose from 'mongoose';
 import authRoutes from './routes/authRoutes.js'; 
 import userRoutes from './routes/userRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
+import cron from 'node-cron';
+import Comment from './models/comment.js';
 
 dotenv.config();
 
@@ -38,4 +40,12 @@ app.get('/test', (req, res) => {
 // Start server
 app.listen(port, () => {
   console.log(`🚀 Server running on http://localhost:${port}`);
+});
+cron.schedule('0 0 * * *', async () => {
+  try {
+    const result = await Comment.deleteMany({ mangaId: null });
+    console.log(`🗑️ Deleted ${result.deletedCount} global comments.`);
+  } catch (error) {
+    console.error('❌ Error deleting global comments:', error.message);
+  }
 });

@@ -54,10 +54,10 @@ const MangaList = () => {
             }
   
             const coverRel = manga.relationships.find(rel => rel.type === 'cover_art');
-            const coverFile = coverRel?.attributes?.fileName;
-            const image = coverFile
-              ? `https://uploads.mangadex.org/covers/${manga.id}/${coverFile}.256.jpg`
-              : 'https://via.placeholder.com/256x360?text=No+Image';
+    const coverFile = coverRel?.attributes?.fileName;
+    const image = coverFile
+      ? `https://uploads.mangadex.org/covers/${manga.id}/${coverFile}.256.jpg?t=${Date.now()}`
+      : 'https://via.placeholder.com/256x360?text=No+Image';
   
             const chapterRes = await axios.get('/chapter', {
               params: {

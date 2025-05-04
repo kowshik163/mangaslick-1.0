@@ -15,6 +15,7 @@ const MangaReader = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [manga, setManga] = useState(null);
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
@@ -26,8 +27,12 @@ const MangaReader = () => {
         setLoading(true);
         setError('');
         const chapterRes = await axios.get(`/chapter/${chapterId}`);
-        const mangaId = chapterRes.data.data.relationships.find(rel => rel.type === 'manga').id;
-
+        const mangaRel = chapterRes.data.data.relationships.find(rel => rel.type === 'manga');
+        const mangaId = mangaRel.id;
+    
+        const mangaRes = await axios.get(`/manga/${mangaId}`);
+        setManga(mangaRes.data.data);
+    
         const res = await axios.get(`/chapter`, {
           params: {
             manga: mangaId,
@@ -36,20 +41,20 @@ const MangaReader = () => {
             limit: 100,
           },
         });
-
+    
         const chaptersList = res.data.data;
         setChapters(chaptersList);
-
+    
         const index = chaptersList.findIndex(ch => ch.id === chapterId);
         setCurrentChapterIndex(index !== -1 ? index : 0);
       } catch (err) {
         console.error('Error fetching chapter data:', err.response || err);
         setError('Failed to load chapters. Please try again later.');
-      }
-      finally {
+      } finally {
         setLoading(false);
       }
     };
+    
     fetchChapterData();
   }, [chapterId]);
 
@@ -97,7 +102,15 @@ const MangaReader = () => {
   const currentChapter = chapters[currentChapterIndex];
   const chapterNumber = currentChapter?.attributes?.chapter || 'Oneshot';
   const chapterTitle = currentChapter?.attributes?.title;
-
+  useEffect(() => {
+    if (manga && chapters.length > 0) {
+      const chapter = chapters[currentChapterIndex];
+      const chapterNum = chapter?.attributes?.chapter || 'Oneshot';
+      const title = manga?.attributes?.title?.en || 'Manga';
+      document.title = `${title}-Chapter ${chapterNum}|Mangaslick`;
+    }
+  }, [manga, chapters, currentChapterIndex]);
+  
   if (loading) return <div className="loading-spinner">Loading...</div>;
   if (error) return <div className="error-message">{error}</div>;
 

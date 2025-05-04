@@ -257,6 +257,7 @@ const Header = () => {
                 <div className="lh1"><Link to="/genre/manga">manga</Link></div>
                 <div className="lh1"><Link to="/genre/manhwa">manhwa</Link></div>
                 <div className="lh1"><Link to="/genre/manhua">manhua</Link></div>
+                <div className="lh1"><Link to="/Community">Community Picks</Link></div>
               </ul>
             </nav>
           </div>

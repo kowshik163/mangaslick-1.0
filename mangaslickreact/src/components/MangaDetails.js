@@ -22,7 +22,7 @@ const MangaDetails = () => {
   const [activeVolume, setActiveVolume] = useState(null);
   const [totalChapters, setTotalChapters] = useState(0);
   const [token, setToken] = useState(localStorage.getItem('token'));
-
+  console.log(id);
   // Fetch Manga Details
   const fetchMangaDetails = useCallback(async () => {
     try {
@@ -221,16 +221,21 @@ const MangaDetails = () => {
   const sortedChapters = [...chapters].sort((a, b) => {
     return sortOrder === 'asc' ? a.number - b.number : b.number - a.number;
   });
+  useEffect(() => {
+   if (manga?.title) {
+     document.title = `${manga.title}|mangaslick`;
+    }
+  }, [manga?.title]);
 
   // Loading/Error
   if (loading && !manga) return <div className="spinner" />;
   if (error) return <div className="error">{error}</div>;
   if (!manga) return <div className="error">Manga not found</div>;
-
+  
   return (
     <div className="manga-details">
       <div className="manga-header">
-        <img src={manga.image} alt={manga.title} className="manga-cover" />
+        <img src={manga.image} alt={manga.title} className="manga-cover" referrerPolicy='no-referrer' />
         <div className="manga-meta">
           <h1>{manga.title}</h1>
           <div className="action-buttons">
@@ -240,7 +245,7 @@ const MangaDetails = () => {
               disabled={!token}
             >
               {bookmarked ? '✓ Bookmarked' : '+ Add to Bookmarks'}
-              {!token && <span className="tooltip">Login to bookmark</span>}
+              {!token && <span className="tooltip">(Login to bookmark)</span>}
             </button>
             <button 
               className="read-btn" 
