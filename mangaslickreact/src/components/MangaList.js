@@ -3,7 +3,7 @@ import './mangalist.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import MangaCard from './MangaCard';
-
+axios.defaults.baseURL = 'http://localhost:5001';
 const MangaList = () => {
   const { type, pageNum } = useParams();
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const MangaList = () => {
   
         const offset = (page - 1) * ITEMS_PER_PAGE;
   
-        const response = await axios.get('/manga', {
+        const response = await axios.get('/api/mangadex/manga', {
           params: {
             limit: ITEMS_PER_PAGE,
             offset: offset,
@@ -59,7 +59,7 @@ const MangaList = () => {
       ? `https://uploads.mangadex.org/covers/${manga.id}/${coverFile}.256.jpg?t=${Date.now()}`
       : 'https://via.placeholder.com/256x360?text=No+Image';
   
-            const chapterRes = await axios.get('/chapter', {
+            const chapterRes = await axios.get('/api/mangadex/chapter', {
               params: {
                 manga: manga.id,
                 limit: 3,

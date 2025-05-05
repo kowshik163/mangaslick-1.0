@@ -31,7 +31,7 @@ const Header = () => {
     const delayDebounce = setTimeout(() => {
       if (query.length >= 2) {
         axios
-          .get('/manga', {
+          .get('/api/mangadex/manga', {
             params: {
               title: query,
               limit: 5,
@@ -50,7 +50,7 @@ const Header = () => {
 
                 let latestChapter = null;
                 try {
-                  const chapterRes = await axios.get('/chapter', {
+                  const chapterRes = await axios.get('/api/mangadex/chapter', {
                     params: {
                       manga: manga.id,
                       limit: 1,

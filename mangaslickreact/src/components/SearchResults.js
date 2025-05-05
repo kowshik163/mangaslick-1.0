@@ -15,7 +15,7 @@ const SearchResults = () => {
         setLoading(true);
 
         // Fetch matching manga titles
-        const response = await axios.get('/manga', {
+        const response = await axios.get('/api/mangadex/manga', {
           params: {
             title: query,
             limit: 20,
@@ -41,7 +41,7 @@ const SearchResults = () => {
             let previousChapter = null;
 
             try {
-              const chapterRes = await axios.get('/chapter', {
+              const chapterRes = await axios.get('/api/mangadex/chapter', {
                 params: {
                   manga: manga.id,
                   limit: 2,

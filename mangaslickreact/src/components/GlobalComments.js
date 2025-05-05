@@ -66,7 +66,7 @@ const GlobalComments = () => {
       }
       // console.log('Token being passed:', token);
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/comments`,
+        `https://backend-production-0226e.up.railway.app/api/comments`,
         { text: input },
         { headers: { Authorization: `Bearer ${token}` } }
       );

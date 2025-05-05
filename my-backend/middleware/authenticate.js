@@ -39,7 +39,7 @@ const authenticate = async (req, res, next) => {
       });
     }
 
-    req.user = { id: user._id.toString() };
+    req.user = { id: user._id.toString(), username: user.username };
     next();
   } catch (err) {
     console.error('Authentication error:', err.message);

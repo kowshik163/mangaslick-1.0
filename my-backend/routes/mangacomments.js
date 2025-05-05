@@ -4,10 +4,14 @@ import authenticate from '../middleware/authenticate.js';
 const router = express.Router();
 router.get('/:mangaId/comments', async (req, res) => {
   const { mangaId } = req.params;
-  const comments = await MangaComment.find({ mangaId }).sort({ time: 1 });
-  res.json(comments);
+  
+  try {
+    const comments = await MangaComment.find({ mangaId }).sort({ time: 1 });
+    res.json({ success: true, comments });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
 });
-
 router.post('/:mangaId/comments', authenticate, async (req, res) => {
     try {
       const { mangaId } = req.params;

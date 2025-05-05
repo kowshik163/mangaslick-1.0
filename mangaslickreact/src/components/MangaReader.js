@@ -26,14 +26,14 @@ const MangaReader = () => {
       try {
         setLoading(true);
         setError('');
-        const chapterRes = await axios.get(`/chapter/${chapterId}`);
+        const chapterRes = await axios.get(`/api/mangadex/chapter/${chapterId}`);
         const mangaRel = chapterRes.data.data.relationships.find(rel => rel.type === 'manga');
         const mangaId = mangaRel.id;
     
-        const mangaRes = await axios.get(`/manga/${mangaId}`);
+        const mangaRes = await axios.get(`/api/mangadex/manga/${mangaId}`);
         setManga(mangaRes.data.data);
     
-        const res = await axios.get(`/chapter`, {
+        const res = await axios.get(`/api/mangadex/chapter`, {
           params: {
             manga: mangaId,
             translatedLanguage: ['en'],
@@ -64,7 +64,7 @@ const MangaReader = () => {
       if (!chapter) return;
 
       try {
-        const res = await axios.get(`/at-home/server/${chapter.id}`);
+        const res = await axios.get(`/api/mangadex/at-home/server/${chapter.id}`);
         const { baseUrl, chapter: chapterData } = res.data;
 
         const pageUrls = chapterData.data.map(page =>

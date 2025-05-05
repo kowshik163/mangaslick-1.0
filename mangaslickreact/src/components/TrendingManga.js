@@ -13,14 +13,14 @@ const TrendingManga = () => {
 
   const fetchTrendingManga = async () => {
     try {
-      const res = await axios.get(`/manga`, {
+      const res = await axios.get(`/api/mangadex/manga`, {
         params: {
           limit: 14,
           order: { followedCount: 'desc' },
           includes: ['cover_art'],
         },
       });
-
+ 
       const formatted = res.data.data.map((item) => {
         const title = item.attributes.title?.en || 'Untitled';
         const id = item.id;

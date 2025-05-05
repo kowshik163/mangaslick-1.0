@@ -27,7 +27,7 @@ const CommunityPicks = () => {
     const fetchCommunityManga = async () => {
       try {
         const mangaDetails = await Promise.all(COMMUNITY_MANGA_IDS.map(async (id) => {
-          const mangaRes = await axios.get(`/manga/${id}`, {
+          const mangaRes = await axios.get(`/api/mangadex/manga/${id}`, {
             params: {
               includes: ['cover_art'],
             },
@@ -43,7 +43,7 @@ const CommunityPicks = () => {
             ? `https://uploads.mangadex.org/covers/${manga.id}/${coverFile}.256.jpg`
             : 'https://via.placeholder.com/256x360?text=No+Image';
 
-          const chapterRes = await axios.get('/chapter', {
+          const chapterRes = await axios.get('/api/mangadex/chapter', {
             params: {
               manga: manga.id,
               limit: 3,

@@ -12,20 +12,32 @@ const MangaComments = ({ mangaId, token: propToken, username }) => {
 
   useEffect(() => {
     const fetchComments = async () => {
-      try {
+      try {  
         const response = await axios.get(
-          `http://localhost:5001/api/manga/${mangaId}/comments`,
-          token ? { headers: { Authorization: `Bearer ${token}` } } : {}
+          `https://backend-production-0226e.up.railway.app/api/${mangaId}/comments`,
+          {
+            headers:{
+            // withCredentials: false
+            'Content-Type': 'application/json',}
+          }
         );
-        setComments(Array.isArray(response.data) ? response.data : []);
+        console.log('RESPONSE:', response);
+  
+        if (response.data?.success && Array.isArray(response.data.comments)) {
+          setComments(response.data.comments);
+        } else {
+          setComments([]);
+          console.error('Unexpected format:', response.data);
+        }
       } catch (err) {
-        console.error("Error loading comments:", err);
+        console.error('Error loading comments:', err.message);
         setComments([]);
       }
     };
-
+  
     fetchComments();
-  }, [mangaId, token]);
+  }, [mangaId]);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,7 +63,7 @@ const MangaComments = ({ mangaId, token: propToken, username }) => {
 
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/manga/${mangaId}/comments`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/${mangaId}/comments`,
         { text: input },
         { 
           headers: { 
@@ -93,7 +105,7 @@ const MangaComments = ({ mangaId, token: propToken, username }) => {
 
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/manga/${mangaId}/comments/${id}/like`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/${mangaId}/comments/${id}/like`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -120,7 +132,7 @@ const MangaComments = ({ mangaId, token: propToken, username }) => {
 
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/manga/${mangaId}/comments/${id}/reply`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/${mangaId}/comments/${id}/reply`,
         { text: replyText },
         { headers: { Authorization: `Bearer ${token}` } }
       );

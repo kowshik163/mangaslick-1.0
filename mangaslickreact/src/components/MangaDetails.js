@@ -27,10 +27,10 @@ const MangaDetails = () => {
   const fetchMangaDetails = useCallback(async () => {
     try {
       const [detailsRes, statsRes] = await Promise.all([
-        axios.get(`/manga/${id}`, {
+        axios.get(`/api/mangadex/manga/${id}`, {
           params: { includes: ['author', 'artist', 'cover_art'] },
         }),
-        axios.get(`/statistics/manga/${id}`),
+        axios.get(`/api/mangadex/statistics/manga/${id}`),
       ]);
 
       const data = detailsRes.data.data;
@@ -72,7 +72,7 @@ const MangaDetails = () => {
     try {
       setLoading(true);
 
-      const res = await axios.get(`/chapter`, {
+      const res = await axios.get(`/api/mangadex/chapter`, {
         params: {
           manga: id,
           limit: 100,
