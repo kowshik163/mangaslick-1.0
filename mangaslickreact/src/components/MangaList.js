@@ -3,7 +3,7 @@ import './mangalist.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import MangaCard from './MangaCard';
-axios.defaults.baseURL = 'http://localhost:5001';
+axios.defaults.baseURL = 'https://backend-production-0226e.up.railway.app';
 const MangaList = () => {
   const { type, pageNum } = useParams();
   const navigate = useNavigate();
