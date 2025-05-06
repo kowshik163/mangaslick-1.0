@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MangaCard from './MangaCard';
 import axios from 'axios';
 import './mangalist.css'; // Reuse the same styles
+import {Helmet} from 'react-helmet';
 
 const COMMUNITY_MANGA_IDS = [
   '9ed16bc9-f570-4e71-8dda-aebc098b683b',
