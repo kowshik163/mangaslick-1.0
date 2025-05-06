@@ -1,15 +1,21 @@
 import React from 'react';
 import { useEffect } from 'react';
-
+import {Helmet} from 'react-helmet';
 const About = () => {
    useEffect(() => {
           
-          document.title = "About | My Website"; // Set custom tab name here
+          document.title = "About | Mangaslick"; // Set custom tab name here
           return () => {
             document.title = "Mangaslick"; // Reset to default when leaving this page
           };
         }, []);
   return (
+    <>
+      <Helmet>
+        <meta name="description" content="Discover Mangaslick - your ultimate manga reading platform with thousands of titles, a clean interface, bookmarks, and a vibrant community." />
+        <meta name="keywords" content="manga, manga reader, manga platform, manga library, manga community, manga reader interface, manga bookmarks" />
+        <meta name="robots" content="index, follow" />
+      </Helmet>
     <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', lineHeight: '1.8' }}>
       <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>About MangaVerse</h1>
       <p>
@@ -42,7 +48,7 @@ const About = () => {
       <p>
         Have questions, suggestions, or feedback? We'd love to hear from you. Reach out via our support page or connect with us on social media.
       </p>
-    </div>
+    </div></>
   );
 };
 

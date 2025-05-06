@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 const PrivacyPolicy = () => {
   useEffect(() => {
       
-      document.title = "Privacy Policy  | My Website"; // Set custom tab name here
+      document.title = "Privacy Policy  | Mangaslick"; // Set custom tab name here
       return () => {
         document.title = "Mangaslick"; // Reset to default when leaving this page
       };

@@ -78,6 +78,32 @@ const CommunityPicks = () => {
 
   return (
     <div className="homepage">
+       {/* SEO Meta Tags using Helmet */}
+       <Helmet>
+        <title>Community Picks | MangaSlick</title>
+        <meta
+          name="description"
+          content="Explore the best manga selected by the community. Check out the latest manga chapters and discover hidden gems!"
+        />
+        <meta property="og:title" content="Community Picks | MangaSlick" />
+        <meta
+          property="og:description"
+          content="Explore the best manga selected by the community. Check out the latest manga chapters and discover hidden gems!"
+        />
+        <meta
+          property="og:image"
+          content="https://via.placeholder.com/256x360?text=MangaSlick"
+        />
+        <meta name="twitter:title" content="Community Picks | MangaSlick" />
+        <meta
+          name="twitter:description"
+          content="Explore the best manga selected by the community. Check out the latest manga chapters and discover hidden gems!"
+        />
+        <meta
+          name="twitter:image"
+          content="https://via.placeholder.com/256x360?text=MangaSlick"
+        />
+      </Helmet>
       <h1 style={{ color: 'white', textAlign: 'center' }}>🌟 Community Picks</h1>
 
       {loading ? (

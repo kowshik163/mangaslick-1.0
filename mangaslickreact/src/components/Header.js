@@ -129,7 +129,7 @@ const Header = () => {
     <header>
       <div className="main1">
         <div className="profile" id="realimg">
-          <Link to="/">
+          <Link to="/" title='go to home page'>
             <img src="/itislogo.jpeg" alt="mangaslick" />
           </Link>
         </div>
@@ -151,7 +151,7 @@ const Header = () => {
                     }}
                     placeholder="  search for manga"
                   />
-                  <button className="search-btn" type="submit">
+                  <button className="search-btn" type="submit" title='submit search'>
                     <BsSearch size={18} />
                   </button>
 
@@ -177,7 +177,7 @@ const Header = () => {
                                   setQuery('');
                                   setShowDropdown(false);
                                 }}
-                                style={{ display: 'flex', gap: '10px', alignItems: 'center', textDecoration: 'none', marginBottom: '5px' }}>
+                                style={{ display: 'flex', gap: '10px', alignItems: 'center', textDecoration: 'none', marginBottom: '5px' }} title={`Go to ${item.title} page`} >
                                 <div>
                                   <div style={{ fontWeight: 'bold', height: '30%', cursor: 'pointer', marginBottom: '10px' }}>{item.title}</div>
                                 </div>
@@ -194,6 +194,7 @@ const Header = () => {
                                     cursor: 'pointer',
                                     color: 'rgb(30, 44, 73)',
                                   }}
+                                  title={`Read Chapter ${item.latestChapter.number}`}
                                 >
                                   Latest: Chapter {item.latestChapter.number}
                                 </Link>
@@ -234,6 +235,7 @@ const Header = () => {
                     className="profile-icon"
                     size={30}
                     onClick={toggleProfileMenu}
+                     title="Open Profile Menu"
                   />
                   {showProfileMenu && (
                     <ul className="profile-dropdown show">

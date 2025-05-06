@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Helmet} from 'react-helmet';
 import './mangalist.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -15,6 +16,27 @@ const MangaList = () => {
   const [hasMore, setHasMore] = useState(true);
 
   const ITEMS_PER_PAGE = 16;
+  useEffect(() => {
+    if (mangaData.length > 0) {
+      const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": `Manga List - Page ${page}`,
+        "url": window.location.href,
+        "itemListElement": mangaData.map((manga, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "url": `https://yourwebsite.com/manga/${manga.id}`,
+          "name": manga.title,
+          "image": manga.image,
+        })),
+      };
+  
+      // Trigger a custom event to add structured data
+      window.dispatchEvent(new CustomEvent('structuredData', { detail: structuredData }));
+    }
+  }, [mangaData, page]);
+  
   useEffect(() => {
     const genreMapping = {
       murim: ['martial arts','historical'],
@@ -132,6 +154,15 @@ const MangaList = () => {
 
   return (
     <div className="homepage">
+      <Helmet>
+      <link rel="canonical" href={`https://yourwebsite.com${type ? `/genre/${type}/page/${page}` : `/page/${page}`}`} />
+        <title>{type ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga - Page ${page}` : `Latest Manga - Page ${page}`}</title>
+        <meta name="description" content={`Explore the latest ${type ? type : ''} manga on page ${page}.`} />
+        <meta property="og:title" content={`${type ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga - Page ${page}` : `Latest Manga - Page ${page}`}`} />
+        <meta property="og:description" content={`Explore the latest ${type ? type : ''} manga on page ${page}.`} />
+        <meta property="og:image" content="https://via.placeholder.com/256x360?text=No+Image" />
+        <meta property="og:url" content={`https://yourwebsite.com${type ? `/genre/${type}/page/${page}` : `/page/${page}`}`} />
+      </Helmet>
       <h1 style={{ color: 'white', textAlign: 'center' }}>
         {type ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga` : 'Latest Manga'}
       </h1>

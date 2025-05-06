@@ -1,6 +1,7 @@
 import React from 'react';
 import './genrelist.css';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const GenreList = () => {
   const navigate = useNavigate();
@@ -35,7 +36,34 @@ const GenreList = () => {
 
   return (
     <div className="genre">
-      All genres
+      {/* SEO Meta Tags using Helmet */}
+      <Helmet>
+        <title>Genres | MangaSlick</title>
+        <meta
+          name="description"
+          content="Browse various manga genres like Action, Adventure, Romance, Fantasy, and more. Find your next favorite manga!"
+        />
+        <meta property="og:title" content="Genres | MangaSlick" />
+        <meta
+          property="og:description"
+          content="Browse various manga genres like Action, Adventure, Romance, Fantasy, and more. Find your next favorite manga!"
+        />
+        <meta
+          property="og:image"
+          content="https://via.placeholder.com/256x360?text=MangaSlick"
+        />
+        <meta name="twitter:title" content="Genres | MangaSlick" />
+        <meta
+          name="twitter:description"
+          content="Browse various manga genres like Action, Adventure, Romance, Fantasy, and more. Find your next favorite manga!"
+        />
+        <meta
+          name="twitter:image"
+          content="https://via.placeholder.com/256x360?text=MangaSlick"
+        />
+      </Helmet>
+
+      <h2> All genres</h2>
       <hr />
       {genres.map((genre) => (
         <div key={genre.id} className="g1" onClick={() => handleClick(genre.id)}>

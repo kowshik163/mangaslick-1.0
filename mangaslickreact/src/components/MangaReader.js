@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import './MangaReader.css';
+import { Helmet } from 'react-helmet';
 
 const MangaReader = () => {
   const { chapterId } = useParams();
@@ -116,6 +117,49 @@ const MangaReader = () => {
 
   return (
     <div className={`reader-container ${theme}`}>
+            {/* SEO Meta Tags using Helmet */}
+            <Helmet>
+        <title>{`${manga?.attributes?.title?.en || 'Manga'} - Chapter ${chapterNumber} | MangaSlick`}</title>
+        <meta
+          name="description"
+          content={`${manga?.attributes?.title?.en || 'Manga'} - Chapter ${chapterNumber}. Read manga online at MangaSlick.`}
+        />
+        <meta property="og:title" content={`${manga?.attributes?.title?.en || 'Manga'} - Chapter ${chapterNumber} | MangaSlick`} />
+        <meta
+          property="og:description"
+          content={`${manga?.attributes?.title?.en || 'Manga'} - Chapter ${chapterNumber}. Read manga online at MangaSlick.`}
+        />
+        <meta
+          property="og:image"
+          content={manga?.attributes?.imageUrl || '/default-image.png'}
+        />
+        <meta
+          name="twitter:title"
+          content={`${manga?.attributes?.title?.en || 'Manga'} - Chapter ${chapterNumber} | MangaSlick`}
+        />
+        <meta
+          name="twitter:description"
+          content={`${manga?.attributes?.title?.en || 'Manga'} - Chapter ${chapterNumber}. Read manga online at MangaSlick.`}
+        />
+        <meta
+          name="twitter:image"
+          content={manga?.attributes?.imageUrl || '/default-image.png'}
+        />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Book",
+            "name": `${manga?.attributes?.title?.en || 'Manga'} - Chapter ${chapterNumber}`,
+            "author": manga?.attributes?.author || 'Unknown Author',
+            "publisher": "MangaSlick",
+            "url": window.location.href,
+            "image": manga?.attributes?.imageUrl || '/default-image.png',
+            "description": `${manga?.attributes?.title?.en || 'Manga'} - Chapter ${chapterNumber}. Read online at MangaSlick.`,
+            "mainEntityOfPage": window.location.href,
+          })}
+        </script>
+      </Helmet>
+
       {/* Manga Website Profile Logo */}
       <div className="manga-logo">
        <Link to="/">

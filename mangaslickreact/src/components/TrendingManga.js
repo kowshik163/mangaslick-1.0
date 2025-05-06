@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './trendingmanga.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const TrendingManga = () => {
   const [mangas, setMangas] = useState([]);
@@ -67,6 +68,43 @@ const TrendingManga = () => {
 
   return (
     <div className="trending-manga-container">
+      {/* SEO Meta Tags using Helmet */}
+      <Helmet>
+        <title>Trending Manga | MangaSlick</title>
+        <meta
+          name="description"
+          content="Discover the latest trending manga on MangaSlick. Stay up-to-date with the most popular manga series and read them online."
+        />
+        <meta property="og:title" content="Trending Manga | MangaSlick" />
+        <meta
+          property="og:description"
+          content="Discover the latest trending manga on MangaSlick. Stay up-to-date with the most popular manga series and read them online."
+        />
+        <meta
+          property="og:image"
+          content="https://via.placeholder.com/256x360?text=Trending+Manga"
+        />
+        <meta name="twitter:title" content="Trending Manga | MangaSlick" />
+        <meta
+          name="twitter:description"
+          content="Discover the latest trending manga on MangaSlick. Stay up-to-date with the most popular manga series and read them online."
+        />
+        <meta
+          name="twitter:image"
+          content="https://via.placeholder.com/256x360?text=Trending+Manga"
+        />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Trending Manga | MangaSlick",
+            "description":
+              "Discover the latest trending manga on MangaSlick. Stay up-to-date with the most popular manga series and read them online.",
+            "url": window.location.href,
+            "image": "https://via.placeholder.com/256x360?text=Trending+Manga",
+          })}
+        </script>
+      </Helmet>
       <div className="trending-header">
         <h2 className="trending-title">🔥 Trending Manga</h2>
         <div className="scroll-buttons">

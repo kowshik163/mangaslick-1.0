@@ -3,6 +3,7 @@ import './searchresult.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import MangaCard from './MangaCard';
+import { Helmet } from 'react-helmet';
 
 const SearchResults = () => {
   const { query } = useParams();
@@ -92,6 +93,42 @@ const SearchResults = () => {
 
   return (
     <div className="homepage">
+      {/* SEO Meta Tags using Helmet */}
+      <Helmet>
+        <title>Search Results for: "{query}" | MangaSlick</title>
+        <meta
+          name="description"
+          content={`Explore manga results for the search term: "${query}". Discover manga titles with the latest chapters, cover images, and more.`}
+        />
+        <meta property="og:title" content={`Search Results for: "${query}" | MangaSlick`} />
+        <meta
+          property="og:description"
+          content={`Explore manga results for the search term: "${query}". Discover manga titles with the latest chapters, cover images, and more.`}
+        />
+        <meta
+          property="og:image"
+          content="https://via.placeholder.com/256x360?text=MangaSlick"
+        />
+        <meta name="twitter:title" content={`Search Results for: "${query}" | MangaSlick`} />
+        <meta
+          name="twitter:description"
+          content={`Explore manga results for the search term: "${query}". Discover manga titles with the latest chapters, cover images, and more.`}
+        />
+        <meta
+          name="twitter:image"
+          content="https://via.placeholder.com/256x360?text=MangaSlick"
+        />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": `Search Results for: "${query}" | MangaSlick`,
+            "description": `Explore manga results for the search term: "${query}". Discover manga titles with the latest chapters, cover images, and more.`,
+            "url": window.location.href,
+            "image": "https://via.placeholder.com/256x360?text=MangaSlick",
+          })}
+        </script>
+      </Helmet>
       <h1 className="search-results-title">Search Results for: "{query}"</h1>
 
       {loading ? (

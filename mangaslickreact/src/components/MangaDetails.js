@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import axios from 'axios';
 import MangaComments from './MangaComments';
 import './mangadetails.css';
@@ -252,6 +253,43 @@ const toggleBookmark = useCallback(async () => {
   
   return (
     <div className="manga-details">
+      {/* SEO Meta Tags using Helmet */}
+      <Helmet>
+        <title>{manga?.title ? `${manga.title} | MangaSlick` : 'Manga Details | MangaSlick'}</title>
+        <meta name="description" content={manga?.description || 'Detailed information about the manga.'} />
+        <meta property="og:title" content={manga?.title || 'Manga Details'} />
+        <meta property="og:description" content={manga?.description || 'Detailed information about the manga.'} />
+        <meta property="og:image" content={manga?.image || 'https://via.placeholder.com/512x720?text=No+Image'} />
+        <meta property="og:url" content={`https://yoursite.com/manga/${id}`} />
+        <link rel="canonical" href={`https://yoursite.com/manga/${id}`} />
+        
+        {/* Structured Data (JSON-LD) */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Book",
+            "name": manga?.title,
+            "description": manga?.description,
+            "image": manga?.image,
+            "author": {
+              "@type": "Person",
+              "name": manga?.authors || 'Unknown Author',
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "MangaSlick",
+            },
+            "genre": manga?.tags.join(', ') || 'Manga',
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": manga?.averageRating || 0,
+              "ratingCount": manga?.ratingCount || 0,
+            },
+            "datePublished": manga?.year || 'N/A',
+            "url": `https://yoursite.com/manga/${id}`,
+          })}
+        </script>
+      </Helmet>
       <div className="manga-header">
         <img src={manga.image} alt={manga.title} className="manga-cover" referrerPolicy='no-referrer' />
         <div className="manga-meta">
