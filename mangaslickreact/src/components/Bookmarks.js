@@ -158,8 +158,8 @@ const Bookmarks = () => {
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                 <CardMedia
                   component="img"
-                  image={bookmark.coverImage || '/default-manga-cover.jpg'}
-                  alt={bookmark.title}
+                  image={bookmark.coverImage}
+                  alt={bookmark.title} referrerPolicy='no-referrer'
                   sx={{ height: 300, objectFit: 'cover' }}
                   onClick={() => navigate(`/manga/${bookmark.id}`)}
                   style={{ cursor: 'pointer' }}

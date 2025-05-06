@@ -168,7 +168,7 @@ const Header = () => {
                               }}
                               style={{ cursor: 'pointer' }}
                             >
-                              <img src={item.image} alt={item.title} />
+                              <img src={item.image} alt={item.title} referrerPolicy='no-referrer'/>
                             </Link>
                             <div>
                               <Link
@@ -177,8 +177,7 @@ const Header = () => {
                                   setQuery('');
                                   setShowDropdown(false);
                                 }}
-                                style={{ display: 'flex', gap: '10px', alignItems: 'center', textDecoration: 'none', marginBottom: '5px' }}
-                              >
+                                style={{ display: 'flex', gap: '10px', alignItems: 'center', textDecoration: 'none', marginBottom: '5px' }}>
                                 <div>
                                   <div style={{ fontWeight: 'bold', height: '30%', cursor: 'pointer', marginBottom: '10px' }}>{item.title}</div>
                                 </div>
@@ -227,7 +226,7 @@ const Header = () => {
                   )}
                 </div>
               )}
-
+           
               {/* If NOT logged in, show Log in and Sign up buttons */}
               {!loggedIn && (
                 <div className="profile-menu-container" ref={profileRef}>

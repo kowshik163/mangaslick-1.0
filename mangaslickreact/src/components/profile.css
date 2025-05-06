@@ -6,7 +6,13 @@
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+  /* body{ 
+     color: rgb(15, 0, 0);
+  }  */
+  span{
+    color: black;
+    margin-right: 10px;
+  }
   .profile-header {
     display: flex;
     align-items: center;
@@ -128,19 +134,25 @@
     list-style: none;
     padding: 0;
     margin-top: 15px;
+    display:grid;
+    grid-template-columns: repeat(4,15vw);
   }
   
   .bookmarks-list li {
     margin-bottom: 10px;
   }
-  
+.bookmark-item{
+  color: black;
+}
   .bookmark-link {
     text-decoration: none;
     color: #007bff;
     font-weight: bold;
     transition: color 0.3s ease;
   }
-  
+  p{
+    color: black;
+  }
   .bookmark-link:hover {
     color: #0056b3;
   }
@@ -157,5 +169,10 @@
     text-align: center;
     font-size: 14px;
     color: #333;
+    /* color: black; */
   }
-  
+  @media (max-width: 480px){
+    .bookmarks-list{
+      grid-template-columns: repeat(2,35vw);
+    }
+  }

@@ -36,16 +36,13 @@ const Profile = () => {
         return;
       }
   
-      try {console.log('🔍 Backend URL being hit:', `${process.env.REACT_APP_BACKEND_URL}/api/user`);
-
+      try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Accept': 'application/json',
           },
         });
-  
-        console.log('✅ Raw response:', response);
   
         if (response.data?.success) {
           const userData = response.data.data;
@@ -62,7 +59,7 @@ const Profile = () => {
           setError(response.data.message || 'Failed to load profile data');
         }
       } catch (err) {
-        console.error('❌ Axios error:', err);
+        console.error('Axios error:', err);
         setError(err.response?.data?.message || 'Failed to load profile data. Please try again later.');
       } finally {
         setLoading(false);
@@ -311,7 +308,7 @@ const Profile = () => {
             Update Password
           </button>
         </div>
-
+ 
         {/* Bookmarks Section */}
         <div className="section">
           <h3>Your Bookmarked Manga</h3>
@@ -320,12 +317,13 @@ const Profile = () => {
               {profileData.bookmarks.map((bookmark) => (
                 <div key={bookmark.id} className="bookmark-item">
                   <img
-                    src={bookmark.coverImage || '/default-cover.jpg'}
+                    src={bookmark.coverImage}
                     alt={bookmark.title}
-                    style={{ width: '100px' }}
+                    style={{ width: '100px' }}referrerPolicy='no-referrer'
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src = '/default-cover.jpg';
+                      
                     }}
                   />
                   <div>{bookmark.title}</div>
