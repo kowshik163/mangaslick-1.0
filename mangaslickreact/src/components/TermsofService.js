@@ -46,7 +46,7 @@ const TermsOfService = () => {
 
       <h2 style={{ marginTop: '2rem', fontSize: '1.8rem' }}>📬 Contact Us</h2>
       <p>
-        For questions about these terms, please reach out to us at support@mangaslick.com.
+        For questions about these terms, please reach out to us at mangaslick@gmail.com.
       </p>
     </div>
   );

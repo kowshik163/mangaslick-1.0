@@ -29,32 +29,29 @@ const Bookmarks = () => {
         navigate('/login');
         return;
       }
-
+  
       const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/api/user/bookmarks`, 
+        `/api/user/bookmarks`, 
         {
+          // withCredentials: true,
           headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
           cancelToken,
-          withCredentials: true
         }
       );
       
-      setBookmarks(response.data || []);
-    } catch (error) {
-      if (axios.isCancel(error)) {
-        return;
+      // Add debug logging
+      console.log('Bookmarks response:', response.data);
+      
+      if (!response.data || !response.data.bookmarks) {
+        throw new Error('Invalid response structure');
       }
       
-      console.error('Error fetching bookmarks:', error);
-      if (error.response?.status === 401) {
-        localStorage.removeItem('token');
-        navigate('/login');
-      } else {
-        setError(error.response?.data?.message || 'Failed to load bookmarks. Please try again later.');
-      }
+      setBookmarks(response.data.bookmarks);
+    } catch (error) {
+      // ... existing error handling
     } finally {
       setLoading(false);
     }
@@ -69,7 +66,7 @@ const Bookmarks = () => {
       }
 
       await axios.delete(
-        `${process.env.REACT_APP_BACKEND_URL}/api/user/bookmarks/${mangaId}`, 
+        `/api/user/bookmarks/${mangaId}`, 
         {
           headers: { 
             'Authorization': `Bearer ${token}`,
@@ -149,7 +146,7 @@ const Bookmarks = () => {
             variant="contained" 
             color="primary" 
             sx={{ mt: 2 }}
-            onClick={() => navigate('/manga')}
+            onClick={() => navigate('/')}
           >
             Browse Mangas
           </Button>

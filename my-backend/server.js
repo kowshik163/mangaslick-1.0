@@ -21,17 +21,25 @@ const port = process.env.PORT || 5001;
 await connectRedis();
 app.locals.redisClient = redisClient;
 
+const allowedOrigins = [
+  'https://mangaslick.vercel.app',
+  'http://localhost:3000',
+  'https://backend-production-0226e.up.railway.app',
+  'https://1591-2405-201-c03a-7069-652d-d87b-1603-99d9.ngrok-free.app',
+];
+
 app.use(cors({
-  origin: [
-    'https://mangaslick.vercel.app',
-    'http://localhost:3000',
-    'https://backend-production-0226e.up.railway.app',
-  ],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, origin); // <- important fix here
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: 'GET,POST,PUT,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 }));
-
 app.use(express.json());
 
 // Connect to MongoDB

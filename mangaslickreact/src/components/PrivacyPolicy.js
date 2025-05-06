@@ -45,7 +45,7 @@ const PrivacyPolicy = () => {
 
       <h2 style={{ marginTop: '2rem', fontSize: '1.8rem' }}>✉️ Contact Us</h2>
       <p>
-        If you have any questions or concerns about this Privacy Policy or how your data is handled, please contact us via our support form or at support@mangaslick.com.
+        If you have any questions or concerns about this Privacy Policy or how your data is handled, please contact us via our support form or at mangaslick@gmail.com.
       </p>
 
       <p style={{ marginTop: '2rem', fontStyle: 'italic' }}>

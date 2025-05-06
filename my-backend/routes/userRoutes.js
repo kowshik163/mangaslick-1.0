@@ -7,13 +7,19 @@ import {
 } from '../controllers/userController.js';
 import authenticate from '../middleware/authenticate.js';
 import { body } from 'express-validator';
+import {
+  addBookmark,
+  removeBookmark,
+  isBookmarked,
+  getBookmarks,
+} from '../controllers/bookmarksController.js';
 
 const router = express.Router();
-
-// GET user profile
 router.get('/', authenticate, getProfile);
-
-
+router.post('/bookmarks', authenticate, addBookmark);
+router.delete('/bookmarks/:id', authenticate, removeBookmark);
+router.get('/bookmarks/:id', authenticate, isBookmarked);
+router.get('/bookmarks', authenticate, getBookmarks);
 // UPDATE username
 router.put(
   '/username',

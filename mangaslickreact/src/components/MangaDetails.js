@@ -60,7 +60,7 @@ const MangaDetails = () => {
         image: coverUrl,
       };
 
-      setManga(mangaData);
+      setManga(mangaData); 
     } catch (err) {
       console.error('Failed to fetch manga details:', err);
       setError('Failed to load manga details.');
@@ -125,14 +125,14 @@ const MangaDetails = () => {
         setBookmarked(false);
         return;
       }
-
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/user/bookmarks/${id}`, {
+  
+      const response = await axios.get(`/api/user/bookmarks/${id}`, {
         headers: {
           Authorization: `Bearer ${currentToken}`,
         },
       });
-
-      if (response.data && typeof response.data.bookmarked !== 'undefined') {
+  
+      if (response.data?.bookmarked !== undefined) {
         setBookmarked(response.data.bookmarked);
       } else {
         console.error('Unexpected bookmark status response:', response.data);
@@ -145,43 +145,61 @@ const MangaDetails = () => {
       console.error('Error fetching bookmark status:', err);
     }
   }, [id, token]);
-
   // Toggle Bookmark
-  const toggleBookmark = useCallback(async () => {
-    const currentToken = token || localStorage.getItem('token');
-    if (!currentToken) {
-      alert('Please log in to bookmark manga');
+ // Add useEffect to fetch bookmark status on mount and when id/token changes
+useEffect(() => {
+  fetchBookmarkStatus();
+}, [fetchBookmarkStatus]);
+
+// Update toggleBookmark to handle state after successful API call
+const toggleBookmark = useCallback(async () => {
+  const currentToken = token || localStorage.getItem('token');
+  if (!currentToken) {
+    alert('Please log in to bookmark manga');
+    return;
+  }
+
+  try {
+    let response;
+    if (bookmarked) {
+      // Remove bookmark
+      response = await axios.delete(`/user/bookmarks/${id}`, {
+        headers: { Authorization: `Bearer ${currentToken}` },
+      });
+      setBookmarked(false); // Optimistic update
+    } else {
+      // Add bookmark
+      response = await axios.post(
+        `/api/user/bookmarks`,
+        { mangaId: id, mangaTitle: manga?.title, mangaImage: manga?.image },
+        { headers: { Authorization: `Bearer ${currentToken}` } }
+      );
+      
+      // If already bookmarked, sync UI with backend
+      if (response.data?.bookmarked === true) {
+        setBookmarked(true);
+        return;
+      }
+      
+      setBookmarked(true); // Optimistic update
+    }
+  } catch (err) {
+    console.error('Error toggling bookmark:', err);
+
+    // Handle "already bookmarked" case gracefully
+    if (err.response?.status === 400 && err.response.data?.bookmarked === true) {
+      setBookmarked(true); // Force UI to show "bookmarked" state
       return;
     }
 
-    try {
-      if (bookmarked) {
-        await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/user/bookmarks/${id}`, {
-          headers: {
-            Authorization: `Bearer ${currentToken}`,
-          },
-        });
-      } else {
-        await axios.post(
-          `${process.env.REACT_APP_BACKEND_URL}/api/user/bookmarks`,
-          { mangaId: id, mangaTitle: manga?.title, mangaImage: manga?.image },
-          {
-            headers: {
-              Authorization: `Bearer ${currentToken}`,
-            },
-          }
-        );
-      }
-      setBookmarked(!bookmarked);
-    } catch (err) {
-      console.error('Error toggling bookmark:', err);
-      if (err.response?.status === 401) {
-        alert('Session expired. Please log in again.');
-        localStorage.removeItem('token');
-        setToken(null);
-      }
+    if (err.response?.status === 401) {
+      alert('Session expired. Please log in again.');
+      localStorage.removeItem('token');
+      setToken(null);
     }
-  }, [bookmarked, id, token, manga]);
+  }
+}, [bookmarked, id, token, manga]);
+  
 
   // Load Manga and Chapters
   useEffect(() => {
