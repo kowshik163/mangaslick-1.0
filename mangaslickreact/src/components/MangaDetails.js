@@ -23,7 +23,7 @@ const MangaDetails = () => {
   const [activeVolume, setActiveVolume] = useState(null);
   const [totalChapters, setTotalChapters] = useState(0);
   const [token, setToken] = useState(localStorage.getItem('token'));
-  console.log(id);
+  // console.log(id);
   // Fetch Manga Details
   const fetchMangaDetails = useCallback(async () => {
     try {
@@ -72,7 +72,7 @@ const MangaDetails = () => {
   const fetchChapters = useCallback(async (offsetValue = 0, order = sortOrder) => {
     try {
       setLoading(true);
-
+  
       const res = await axios.get(`/api/mangadex/chapter`, {
         params: {
           manga: id,
@@ -83,40 +83,47 @@ const MangaDetails = () => {
           contentRating: ['safe', 'suggestive', 'erotica'],
         },
       });
-
+  
       const newChapters = res.data.data.map(chap => ({
         id: chap.id,
-        number: chap.attributes.chapter ? parseFloat(chap.attributes.chapter) : 0,
+        number: isNaN(parseFloat(chap.attributes.chapter)) ? null : parseFloat(chap.attributes.chapter),
         title: chap.attributes.title || `Chapter ${chap.attributes.chapter || '?'}`,
         volume: chap.attributes.volume || 'none',
         date: new Date(chap.attributes.updatedAt).toLocaleDateString(),
       }));
-
-      if (offsetValue === 0) {
-        setChapters(newChapters);
-      } else {
-        setChapters(prev => [...prev, ...newChapters]);
-      }
-
+  
+      // Remove duplicates based on chapter number (keeping the first occurrence)
+      const seen = new Set();
+      const filteredChapters = (offsetValue === 0 ? newChapters : [...chapters, ...newChapters])
+        .filter(chap => {
+          if (chap.number === null) return true;
+          const key = chap.number.toString();
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+  
+      setChapters(filteredChapters);
       setTotalChapters(res.data.total);
       setHasMore(offsetValue + 100 < res.data.total);
       setOffset(prev => prev + newChapters.length);
-
+  
       // Group chapters into volumes
       const grouped = {};
-      newChapters.forEach(chap => {
+      filteredChapters.forEach(chap => {
         if (!grouped[chap.volume]) grouped[chap.volume] = [];
         grouped[chap.volume].push(chap);
       });
-
-      setVolumes(prev => ({ ...prev, ...grouped }));
+  
+      setVolumes(grouped);
     } catch (err) {
       console.error('Failed to fetch chapters:', err);
       setError('Failed to load chapters.');
     } finally {
       setLoading(false);
     }
-  }, [id, sortOrder]);
+  }, [id, sortOrder, chapters]);
+  
 
   // Fetch bookmark status from the backend
   const fetchBookmarkStatus = useCallback(async () => {
@@ -237,9 +244,12 @@ const toggleBookmark = useCallback(async () => {
     setActiveVolume(prev => (prev === vol ? null : vol));
   };
 
-  const sortedChapters = [...chapters].sort((a, b) => {
-    return sortOrder === 'asc' ? a.number - b.number : b.number - a.number;
-  });
+  // const sortedChapters = [...chapters].sort((a, b) => {
+  //   const aNum = a.number ?? -1; // or Number.MAX_VALUE for asc
+  //   const bNum = b.number ?? -1;
+  //   return sortOrder === 'asc' ? aNum - bNum : bNum - aNum;
+  // });
+
   useEffect(() => {
    if (manga?.title) {
      document.title = `${manga.title}|mangaslick`;
@@ -376,18 +386,32 @@ const toggleBookmark = useCallback(async () => {
           </div>
         )}
 
-        <div className="chapter-list">
-          {sortedChapters
-            .filter(chap => !activeVolume || chap.volume === activeVolume)
-            .slice(0, visibleCount)
-            .map(chap => (
-              <Link key={chap.id} to={`/read/${chap.id}`} className="chapter-item">
-                <div className="chapter-number">Chapter {chap.number || '?'}</div>
-                <div className="chapter-title">{chap.title}</div>
-                <div className="chapter-date">{chap.date}</div>
-              </Link>
-            ))}
-        </div>
+<div className="chapter-list">
+  {[...chapters] // Create a new array to avoid mutation
+    .filter(chap => !activeVolume || chap.volume === activeVolume)
+    .sort((a, b) => {
+      const aNum = a.number ?? -1;
+      const bNum = b.number ?? -1;
+      return sortOrder === 'asc' ? aNum - bNum : bNum - aNum;
+    })
+    .slice(0, visibleCount)
+    .map(chap => (
+      <Link 
+        key={chap.id} 
+        to={`/read/${chap.id}`} 
+        className="chapter-item"
+        onClick={(e) => {
+          e.preventDefault(); // Prevent default navigation
+          console.log('Navigating to chapter:', chap.id, 'Chapter number:', chap.number);
+          navigate(`/read/${chap.id}`); // Use navigate function directly
+        }}
+      >
+        <div className="chapter-number">Chapter {chap.number || '?'}</div>
+        <div className="chapter-title">{chap.title}</div>
+        <div className="chapter-date">{chap.date}</div>
+      </Link>
+    ))}
+</div>
 
         {(hasMore || (activeVolume && visibleCount < chapters.filter(chap => chap.volume === activeVolume).length)) && (
           <button className="load-more-btn" onClick={handleLoadMore}>

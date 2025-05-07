@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './reset.css';
-
+// import { Analytics } from "@vercel/analytics/react"
 // import { GoogleOAuthProvider } from '@react-oauth/google';
 import Header from './components/Header';
 import GenreList from './components/GenreList';
@@ -29,10 +29,18 @@ const AppWrapper = () => {
   const location = useLocation();
   const [currentFilters] = useState({});
   useEffect(() => {
+
     if (location.pathname === '/') {
-      document.title = 'Home | Mangaslick'; // Set custom title for homepage
+      document.title = 'Home | Mangaslick';
     }
-  }, [location.pathname]); // Update title whenever location changes
+  
+    // Send Google Analytics page view
+    if (window.gtag) {
+      window.gtag('event', 'page_view', {
+        page_path: location.pathname + location.search,
+      });
+    }
+  }, [location]);
   
   const FilteredMangaSection = (
     <>
@@ -101,7 +109,8 @@ const App = () => {
   return (
     // <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
       <Router>
-        <AppWrapper />
+        <AppWrapper/>
+        {/* <Analytics />  */}
       </Router>
     // </GoogleOAuthProvider>
   );

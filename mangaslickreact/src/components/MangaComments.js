@@ -21,8 +21,7 @@ const MangaComments = ({ mangaId, token: propToken, username }) => {
             'Content-Type': 'application/json',}
           }
         );
-        console.log('RESPONSE:', response);
-  
+
         if (response.data?.success && Array.isArray(response.data.comments)) {
           setComments(response.data.comments);
         } else {
