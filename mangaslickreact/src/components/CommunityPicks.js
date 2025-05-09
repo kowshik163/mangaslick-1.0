@@ -18,6 +18,9 @@ const COMMUNITY_MANGA_IDS = [
   '4ada20eb-085a-491a-8c49-477ab42014d7',
   'b35f67b6-bfb9-4cbd-86f0-621f37e6cb41',
   '32d76d19-8a05-4db0-9fc2-e0b0648fe9d0',
+  'd7f56ace-cd30-48b9-8b64-afeca0077fca',
+  '6e4805a6-75ab-462d-883c-4ddedb8e4df6',
+
 ];
 
 const CommunityPicks = () => {

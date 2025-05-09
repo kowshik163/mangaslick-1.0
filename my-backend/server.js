@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cron from 'node-cron';
 
+import sitemapRoute from './routes/sitemapRoutes.js';
 import authRoutes from './routes/authRoutes.js'; 
 import userRoutes from './routes/userRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
@@ -46,13 +47,15 @@ app.use(express.json());
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
+app.use('/sitemap.xml', sitemapRoute);
 
 // Routes
+app.use('/api', mangadexRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/comments', commentRoutes);//for global comments
 app.use('/api', mangacomments);//for manga comments
-app.use('/api', mangadexRoutes);
+
 app.use((req, res) => {
   res.status(404).json({ error: 'Not found', path: req.originalUrl });
 });

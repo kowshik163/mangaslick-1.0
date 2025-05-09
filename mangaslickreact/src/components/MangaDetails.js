@@ -23,7 +23,7 @@ const MangaDetails = () => {
   const [activeVolume, setActiveVolume] = useState(null);
   const [totalChapters, setTotalChapters] = useState(0);
   const [token, setToken] = useState(localStorage.getItem('token'));
-  // console.log(id);
+  console.log(id);
   // Fetch Manga Details
   const fetchMangaDetails = useCallback(async () => {
     try {

@@ -6,7 +6,10 @@ const CACHE_DURATION = 60 * 60;
 // Proxy and caching logic
 export const getMangaData = async (req, res) => {
   const redisClient = req.app.locals.redisClient;
-
+if (req.path === '/sitemap.xml') {
+    return res.status(404).json({ error: 'Not found' });
+    return next();
+  }
   // Validate Redis connection
   if (!redisClient || !redisClient.isOpen) {
     console.error('Redis connection not available');
