@@ -16,12 +16,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>hhttps://mangaslick.vercel.app/genre/manhwa</loc>
+    <loc>https://mangaslick.vercel.app/genre/manhwa</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>hhttps://mangaslick.vercel.app/genre/manhua</loc>
+    <loc>https://mangaslick.vercel.app/genre/manhua</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
