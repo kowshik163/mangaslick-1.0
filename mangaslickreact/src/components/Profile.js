@@ -60,7 +60,13 @@ const Profile = () => {
         }
       } catch (err) {
         console.error('Axios error:', err);
-        setError(err.response?.data?.message || 'Failed to load profile data. Please try again later.');
+        if (err.response?.status === 401) {
+    setError('Please login.');
+    localStorage.removeItem('token'); // optional: clear the expired token
+    // Optionally: redirect to login page
+  } else {
+    setError(err.response?.data?.message || 'Failed to load profile data. Please try again later.');
+  }
       } finally {
         setLoading(false);
       }

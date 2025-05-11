@@ -155,7 +155,7 @@ const MangaList = () => {
   return (
     <div className="homepage">
       <Helmet>
-      <link rel="canonical" href={`https://yourwebsite.com${type ? `/genre/${type}/page/${page}` : `/page/${page}`}`} />
+      <link rel="canonical" href={`https://mangaslick.vercel.app${type ? `/genre/${type}/page/${page}` : `/page/${page}`}`} />
         <title>{type ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga - Page ${page}` : `Latest Manga - Page ${page}`}</title>
         <meta name="description" content={`Explore the latest ${type ? type : ''} manga on page ${page}.`} />
         <meta property="og:title" content={`${type ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga - Page ${page}` : `Latest Manga - Page ${page}`}`} />

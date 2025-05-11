@@ -64,7 +64,7 @@ const Login = () => {
           {isLoading ? 'Logging in...' : 'Login'}
         </button>
       </form>
-      <p>
+      <p style={{color:'white'}}>
         Don't have an account? <a href="/signup">Sign Up</a>
       </p>
     </div>
