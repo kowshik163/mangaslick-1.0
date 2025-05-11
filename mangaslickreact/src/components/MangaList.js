@@ -155,14 +155,25 @@ const MangaList = () => {
   return (
     <div className="homepage">
       <Helmet>
-      <link rel="canonical" href={`https://mangaslick.vercel.app${type ? `/genre/${type}/page/${page}` : `/page/${page}`}`} />
-        <title>{type ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga - Page ${page}` : `Latest Manga - Page ${page}`}</title>
-        <meta name="description" content={`Explore the latest ${type ? type : ''} manga on page ${page}.`} />
-        <meta property="og:title" content={`${type ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga - Page ${page}` : `Latest Manga - Page ${page}`}`} />
-        <meta property="og:description" content={`Explore the latest ${type ? type : ''} manga on page ${page}.`} />
-        <meta property="og:image" content="https://via.placeholder.com/256x360?text=No+Image" />
-        <meta property="og:url" content={`https://yourwebsite.com${type ? `/genre/${type}/page/${page}` : `/page/${page}`}`} />
-      </Helmet>
+  {page === 1 ? (
+    <link rel="canonical" href="https://mangaslick.vercel.app/" />
+  ) : (
+    <link rel="canonical" href={`https://mangaslick.vercel.app${type ? `/genre/${type}/page/${page}` : `/page/${page}`}`} />
+  )}
+
+  {/* Pagination for next/prev pages */}
+  {page > 1 && (
+    <link rel="prev" href={`https://mangaslick.vercel.app${type ? `/genre/${type}/page/${page - 1}` : `/page/${page - 1}`}`} />
+  )}
+  <link rel="next" href={`https://mangaslick.vercel.app${type ? `/genre/${type}/page/${page + 1}` : `/page/${page + 1}`}`} />
+  
+  <title>{type ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga - Page ${page}` : `Latest Manga - Page ${page}`}</title>
+  <meta name="description" content={`Explore the latest ${type ? type : ''} manga on page ${page}.`} />
+  <meta property="og:title" content={`${type ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga - Page ${page}` : `Latest Manga - Page ${page}`}`} />
+  <meta property="og:description" content={`Explore the latest ${type ? type : ''} manga on page ${page}.`} />
+  <meta property="og:image" content="https://via.placeholder.com/256x360?text=No+Image" />
+  <meta property="og:url" content={`https://yourwebsite.com${type ? `/genre/${type}/page/${page}` : `/page/${page}`}`} />
+</Helmet>
       <h1 style={{ color: 'white', textAlign: 'center' }}>
         {type ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga` : 'Latest Manga'}
       </h1>
