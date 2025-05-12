@@ -154,26 +154,83 @@ const MangaList = () => {
 
   return (
     <div className="homepage">
-      <Helmet>
+     <Helmet>
+  {/* Canonical URL */}
   {page === 1 ? (
     <link rel="canonical" href="https://mangaslick.vercel.app/" />
   ) : (
-    <link rel="canonical" href={`https://mangaslick.vercel.app${type ? `/genre/${type}/page/${page}` : `/page/${page}`}`} />
+    <link
+      rel="canonical"
+      href={`https://mangaslick.vercel.app${type ? `/genre/${type}/page/${page}` : `/page/${page}`}`}
+    />
   )}
 
-  {/* Pagination for next/prev pages */}
+  {/* Pagination meta tags */}
   {page > 1 && (
-    <link rel="prev" href={`https://mangaslick.vercel.app${type ? `/genre/${type}/page/${page - 1}` : `/page/${page - 1}`}`} />
+    <link
+      rel="prev"
+      href={`https://mangaslick.vercel.app${type ? `/genre/${type}/page/${page - 1}` : `/page/${page - 1}`}`}
+    />
   )}
-  <link rel="next" href={`https://mangaslick.vercel.app${type ? `/genre/${type}/page/${page + 1}` : `/page/${page + 1}`}`} />
-  
-  <title>{type ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga - Page ${page}` : `Latest Manga - Page ${page}`}</title>
-  <meta name="description" content={`Explore the latest ${type ? type : ''} manga on page ${page}.`} />
-  <meta property="og:title" content={`${type ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga - Page ${page}` : `Latest Manga - Page ${page}`}`} />
-  <meta property="og:description" content={`Explore the latest ${type ? type : ''} manga on page ${page}.`} />
-  <meta property="og:image" content="https://via.placeholder.com/256x360?text=No+Image" />
-  <meta property="og:url" content={`https://yourwebsite.com${type ? `/genre/${type}/page/${page}` : `/page/${page}`}`} />
+ {hasMore && (
+  <link
+    rel="next"
+    href={`https://mangaslick.vercel.app${type ? `/genre/${type}/page/${page + 1}` : `/page/${page + 1}`}`}
+  />
+)}
+  {/* Meta Title and Description */}
+  <title>
+    {page === 1
+      ? 'Read Manga Online for Free | Latest Manga Updates | MangaSlick'
+      : `${type ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga - Page ${page}` : `Latest Manga - Page ${page}`} | MangaSlick`}
+  </title>
+  <meta
+    name="description"
+    content={
+      page === 1
+        ? 'Read the latest manga updates for free online. Discover trending manga, new chapters, and hidden gems — all in high quality on MangaSlick.'
+        : `Explore the latest ${type || ''} manga on page ${page}. Continue reading new manga updates online for free.`
+    }
+  />
+
+  {/* Open Graph Tags */}
+  <meta
+    property="og:title"
+    content={
+      type
+        ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga - Page ${page}`
+        : `Latest Manga - Page ${page}`
+    }
+  />
+  <meta
+    property="og:description" content={`Explore the latest ${type || ''} manga on page ${page}.`} />
+  <meta property="og:image" content="https://via.placeholder.com/256x360?text=No+Image"/>
+  <meta property="og:url" content={`https://mangaslick.vercel.app${type ? `/genre/${type}/page/${page}` : `/page/${page}`}`} />
+  <meta property="og:site_name" content="MangaSlick" />
+  {/* Web App Metadata */}
+  <meta name="application-name" content="MangaSlick" />
+  {/* JSON-LD Schema */}
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "MangaSlick",
+      alternateName: "Manga Slick",
+      url: "https://mangaslick.vercel.app"
+    })}
+  </script>
 </Helmet>
+
+{page === 1 && (
+<div style={{ color: 'white', textAlign: 'center', marginBottom: '20px' }}>
+  <h2>Read Manga Online for Free</h2>
+  <p>
+    Discover the latest manga updates and trending titles, all available to read for free.
+    Browse high-quality manga chapters in genres like action, romance, and adventure — only on MangaSlick.
+    <a href="#footer-info" style={{ color: '#4CAF50' }}>Learn more in the footer</a> 
+  </p>
+</div>
+)}
       <h1 style={{ color: 'white', textAlign: 'center' }}>
         {type ? `${type.charAt(0).toUpperCase() + type.slice(1)} Manga` : 'Latest Manga'}
       </h1>
