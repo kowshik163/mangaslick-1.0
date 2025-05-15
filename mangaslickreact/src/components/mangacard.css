@@ -16,9 +16,11 @@
 
   }
   .m1title{
+    /* maxHeight: '26%', height: 'auto', overflow: 'hidden' */
      max-height: 26%;
-      height: auto;
+     height: auto;
      overflow: hidden;
+     color: rgb(38, 210, 152);
   }
   .m1img {
     border-radius: 6px;

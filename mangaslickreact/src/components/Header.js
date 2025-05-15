@@ -254,7 +254,7 @@ const Header = () => {
           <div className="list1">
             <nav>
               <ul>
-                <div className="lh1"><Link to="/">home</Link></div>
+                <div className="lh1"><Link to="/">Home</Link></div>
                 <div className="lh1"><Link to="/genre/manga">manga</Link></div>
                 <div className="lh1"><Link to="/genre/manhwa">manhwa</Link></div>
                 <div className="lh1"><Link to="/genre/manhua">manhua</Link></div>

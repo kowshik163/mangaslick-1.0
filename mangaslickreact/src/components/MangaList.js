@@ -107,7 +107,7 @@ const MangaList = () => {
         const filteredManga = updatedMangaData.filter(Boolean);
   
         setMangaData(filteredManga);
-        setHasMore(filteredManga.length === ITEMS_PER_PAGE); // if less than limit, no more pages
+        setHasMore(filteredManga.length === ITEMS_PER_PAGE);
       } catch (err) {
         console.error(err);
         setError('Failed to fetch manga data.');
@@ -155,15 +155,8 @@ const MangaList = () => {
   return (
     <div className="homepage">
      <Helmet>
-  {/* Canonical URL */}
-  {page === 1 ? (
-    <link rel="canonical" href="https://mangaslick.vercel.app/" />
-  ) : (
-    <link
-      rel="canonical"
-      href={`https://mangaslick.vercel.app${type ? `/genre/${type}/page/${page}` : `/page/${page}`}`}
-    />
-  )}
+ 
+    <link rel="canonical" href={`https://mangaslick.vercel.app${type ? `/genre/${type}/page/${page}` : `/page/${page}`}`}/>
 
   {/* Pagination meta tags */}
   {page > 1 && (
@@ -227,7 +220,7 @@ const MangaList = () => {
   <p>
     Discover the latest manga updates and trending titles, all available to read for free.
     Browse high-quality manga chapters in genres like action, romance, and adventure — only on MangaSlick.
-    <a href="#footer-info" style={{ color: '#4CAF50' }}>Learn more in the footer</a> 
+    <a href="#footer-info" style={{ color: '#4CAF50' }}>Learn more</a> 
   </p>
 </div>
 )}

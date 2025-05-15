@@ -47,7 +47,7 @@ app.use(express.json());
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
-app.use('/sitemap.xml', sitemapRoute);
+
 
 // Routes
 app.use('/api', mangadexRoutes);
@@ -68,12 +68,12 @@ app.get('/test', (req, res) => {
   res.json({ message: 'Test route is working' });
 });
 
-// Start server
+
 app.listen(port, () => {
   console.log(`🚀 Server running on http://localhost:${port}`);
 });
 
-// Scheduled job to delete global comments without mangaId
+
 cron.schedule('0 0 * * *', async () => {
   try {
     const result = await Comment.deleteMany({ mangaId: null });

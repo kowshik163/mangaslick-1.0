@@ -12,7 +12,7 @@ const MangaCard = ({ image, title, latestChapters = [], description, id }) => {
       </div>
 
       <div className="m1para">
-        <div style={{ maxHeight: '26%', height: 'auto', overflow: 'hidden' }} className='m1title'>
+        <div className='m1title'>
           <Link to={`/manga/${id}`}>{title}</Link>
         </div>
 
