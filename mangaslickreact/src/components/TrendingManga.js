@@ -71,6 +71,7 @@ const TrendingManga = () => {
       {/* SEO Meta Tags using Helmet */}
       <Helmet>
         <title>Trending Manga | MangaSlick</title>
+        <link rel="canonical" href="https://mangaslick.vercel.app/page/1"/>
         <meta
           name="description"
           content="Discover the latest trending manga on MangaSlick. Stay up-to-date with the most popular manga series and read them online."
@@ -100,7 +101,7 @@ const TrendingManga = () => {
             "name": "Trending Manga | MangaSlick",
             "description":
               "Discover the latest trending manga on MangaSlick. Stay up-to-date with the most popular manga series and read them online.",
-            "url": window.location.href,
+            "url": "https://mangaslick.vercel.app/page/1",
             "image": "https://via.placeholder.com/256x360?text=Trending+Manga",
           })}
         </script>

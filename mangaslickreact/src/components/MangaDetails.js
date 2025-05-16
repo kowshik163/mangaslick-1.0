@@ -270,7 +270,7 @@ const toggleBookmark = useCallback(async () => {
         <meta property="og:title" content={manga?.title || 'Manga Details'} />
         <meta property="og:description" content={manga?.description || 'Detailed information about the manga.'} />
         <meta property="og:image" content={manga?.image || 'https://via.placeholder.com/512x720?text=No+Image'} />
-        <meta property="og:url" content={`https://yoursite.com/manga/${id}`} />
+        <meta property="og:url" content={`https://mangaslick.vercel.app/manga/${id}`} />
         <link rel="canonical" href={`https://mangaslick.vercel.app/manga/${id}`} />
         
         {/* Structured Data (JSON-LD) */}

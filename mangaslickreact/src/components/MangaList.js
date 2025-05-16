@@ -209,7 +209,7 @@ const MangaList = () => {
       "@type": "WebSite",
       name: "MangaSlick",
       alternateName: "Manga Slick",
-      url: "https://mangaslick.vercel.app"
+      url: "https://mangaslick.vercel.app/page/1"
     })}
   </script>
 </Helmet>
