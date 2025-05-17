@@ -1,4 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
+Sitemap: https://mangaslick.vercel.app/sitemap.xml
 User-agent: *
 Disallow:
-Sitemap: https://mangaslick.vercel.app/sitemap.xml
