@@ -147,6 +147,25 @@ setChapters(uniqueChapters);
       document.title = `${title}-Chapter ${chapterNum}|Mangaslick`;
     }
   }, [manga, currentChapter]);
+useEffect(() => {
+  const script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "//www.highperformanceformat.com/2d4f7847e8c5e3a39d84cb0a47fdd289/invoke.js";
+  script.async = true;
+
+  const adDiv = document.getElementById("adsterra-ad");
+  if (adDiv) {
+    // Inject the Adsterra config globally
+    window.atOptions = {
+      key: '2d4f7847e8c5e3a39d84cb0a47fdd289',
+      format: 'iframe',
+      height: 300,
+      width: 160,
+      params: {}
+    };
+    adDiv.appendChild(script);
+  }
+}, []);
 
   if (loading) return <div className="loading-spinner">Loading...</div>;
   if (error) return <div className="error-message">{error}</div>;
@@ -206,7 +225,7 @@ setChapters(uniqueChapters);
           </div>
         </div>
       </div>
-
+      <div id="adsterra-ad" style={{ width: '160px', height: '300px' }} />
       <div className={`manga-pages ${readingMode}`}>
         {pages.map((url, i) => (
           <img key={i} src={url} alt={`Page ${i + 1}`} loading="lazy" />
