@@ -3,8 +3,6 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cron from 'node-cron';
-
-import sitemapRoute from './routes/sitemapRoutes.js';
 import authRoutes from './routes/authRoutes.js'; 
 import userRoutes from './routes/userRoutes.js';
 import commentRoutes from './routes/commentRoutes.js';
@@ -26,7 +24,7 @@ const allowedOrigins = [
   'https://mangaslick.vercel.app',
   'http://localhost:3000',
   'https://backend-production-0226e.up.railway.app',
-  'https://1591-2405-201-c03a-7069-652d-d87b-1603-99d9.ngrok-free.app',
+  'https://510f-2405-201-c03a-7069-a1ab-e5dd-37f2-2d47.ngrok-free.app',
 ];
 
 app.use(cors({
