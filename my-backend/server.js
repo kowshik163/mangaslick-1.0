@@ -54,11 +54,9 @@ app.use('/api/user', userRoutes);
 app.use('/api/comments', commentRoutes);//for global comments
 app.use('/api', mangacomments);//for manga comments
 
-app.use((req, res) => {
-  res.status(404).json({ error: 'Not found', path: req.originalUrl });
-});
 
 app.get('/mysitemap.xml', (req, res) => {
+  console.log('Sitemap route hit');
   const filePath = path.join(process.cwd(), 'public', 'mysitemap.xml');
   if (fs.existsSync(filePath)) {
     res.setHeader('Content-Type', 'application/xml');
@@ -66,6 +64,9 @@ app.get('/mysitemap.xml', (req, res) => {
   } else {
     res.status(404).send('Sitemap not found');
   }
+});
+app.use((req, res) => {
+  res.status(404).json({ error: 'Not found', path: req.originalUrl });
 });
 app.get('/', (req, res) => {
   res.send('🚀 Server is running and connected to MongoDB!');
