@@ -9,7 +9,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const BASE_URL = 'https://mangaslick.vercel.app';
-
 // Static URLs
 const staticUrls = [
   '/page/1',
@@ -138,13 +137,11 @@ async function generateSitemap() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urlEntries.join('\n')}
 </urlset>`;
-
   fs.writeFileSync(
-    path.join(__dirname, '../mangaslickreact/public', 'mysitemap.xml'),
+    path.join(__dirname, '../public', 'sitemap.xml'),
     sitemap.trim()
   );
   console.log('✅ Sitemap generated successfully with famous and latest manga slugs!');
-
   // Notify search engines
   await notifySearchEngines();
 }
