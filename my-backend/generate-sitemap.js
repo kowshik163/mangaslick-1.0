@@ -124,7 +124,6 @@ async function generateSitemap() {
     <changefreq>${url === '/page/1' ? 'daily' : 'weekly'}</changefreq>
     <priority>${url === '/page/1' ? '1.0' : '0.7'}</priority>
   </url>`),
-
     ...allSlugs.map(slug => `
   <url>
     <loc>${BASE_URL}/manga/${slug}</loc>
@@ -132,20 +131,18 @@ async function generateSitemap() {
     <priority>0.8</priority>
   </url>`),
   ];
-
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urlEntries.join('\n')}
 </urlset>`;
   fs.writeFileSync(
-    path.join(__dirname, '../public', 'sitemap.xml'),
+    path.join(__dirname, '../public', 'mysitemap.xml'),
     sitemap.trim()
   );
   console.log('✅ Sitemap generated successfully with famous and latest manga slugs!');
   // Notify search engines
   await notifySearchEngines();
 }
-
 // Schedule cron job to run daily at midnight (00:00)
 cron.schedule('0 0 * * *', () => {
   console.log('🕛 Running scheduled sitemap generation...');

@@ -58,7 +58,15 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Not found', path: req.originalUrl });
 });
 
-// Root routes
+app.get('/mysitemap.xml', (req, res) => {
+  const filePath = path.join(process.cwd(), 'public', 'mysitemap.xml');
+  if (fs.existsSync(filePath)) {
+    res.setHeader('Content-Type', 'application/xml');
+    fs.createReadStream(filePath).pipe(res);
+  } else {
+    res.status(404).send('Sitemap not found');
+  }
+});
 app.get('/', (req, res) => {
   res.send('🚀 Server is running and connected to MongoDB!');
 });
