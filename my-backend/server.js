@@ -62,7 +62,7 @@ app.get('/mysitemap.xml', (req, res) => {
   const filePath = path.join(process.cwd(), 'public', 'mysitemap.xml');
   if (fs.existsSync(filePath)) {
     res.setHeader('Content-Type', 'application/xml');
-    fs.createReadStream(filePath).pipe(res);
+    fs.createReadStream(filePath).pipe(res);œ
   } else {
     res.status(404).send('Sitemap not found');
   }
